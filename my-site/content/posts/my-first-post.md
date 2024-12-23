@@ -8,4 +8,4 @@ title = 'My First Post'
 MICS実験
 
 
-![写真](/images/a.PNG)
+![写真](/images/caby.PNG)
