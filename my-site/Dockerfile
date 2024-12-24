@@ -1,21 +1,8 @@
-# ベースイメージ
-FROM klakegg/hugo:ext-alpine AS build
+FROM hugomods/hugo:latest
 
-# 作業ディレクトリの設定
-WORKDIR /app
+COPY . /src/
 
-# プロジェクトのソースコードをコピー
-COPY . /app
+EXPOSE 1313
 
-# サイトのビルド（`public/`を生成）
-RUN hugo --minify
-
-# ランタイムイメージ
-FROM nginx:alpine
-
-# 公開ディレクトリをNginxのHTMLルートにコピー
-COPY --from=build /app/public /usr/share/nginx/html
-
-# Nginxを起動
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["hugo", "server", "--bind", "0.0.0.0", "--port", "1313", "-D", "-F"]
+compose.yml
